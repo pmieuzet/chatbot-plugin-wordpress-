@@ -12,31 +12,26 @@ function my_chatbot_display_interface()
 <!doctype html>
     <html>
     <style>
-        .chatbot {
+        #chatbot {
           border: 1px solid #ccc;
           border-radius: 5px;
           max-width: 600px;
           margin: auto;
         }
 
-        .chatbot-header {
+        #chatbot-header {
           background-color: #f5f5f5;
           padding: 10px;
           border-bottom: 1px solid #ccc;
         }
 
-        .chatbot-body {
+        #chatbot-body {
           height: 300px;
           overflow-y: scroll;
           padding: 10px;
         }
 
-        .chat-container {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .chat-message {
+        #chat-message {
           margin-bottom: 10px;
           padding: 5px 10px;
           border-radius: 5px;
@@ -55,7 +50,7 @@ function my_chatbot_display_interface()
 	  border-radius: 3px;
         }
 
-        .chatbot-footer {
+        #chatbot-footer {
           padding: 10px;
           border-top: 1px solid #ccc;
         }
@@ -82,16 +77,16 @@ function my_chatbot_display_interface()
 
     </style>
   <body>
-    <div class="chatbot">
-      <div class="chatbot-header">
+    <div id="chatbot">
+      <div id="chatbot-header">
         <h3>Neurosciences Expert Chatbot</h3>
       </div>
-      <div class="chatbot-body">
-          <ul class="chat-message" id="list">
+      <div id="chatbot-body">
+          <ul id="list">
             <li id="bot">Ask me anything about neurosciences!</li>
           </ul>
       </div>
-      <div class="chatbot-footer">
+      <div id="chatbot-footer">
         <input type="text" placeholder="Type your message here" id="in" />
         <button onclick="getValue();">Send</button>
 	<script>
