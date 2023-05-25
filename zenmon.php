@@ -10,18 +10,75 @@ function my_chatbot_display_interface()
     ?>
 <!doctype html>
     <html>
-    <head>
-        <link rel="stylesheet" href="./styles.css">
-    </head>
-  <body style="background-color:red">
+    <style>
+        .chatbot {
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          max-width: 600px;
+          margin: auto;
+        }
+
+        .chatbot-header {
+          background-color: #f5f5f5;
+          padding: 10px;
+          border-bottom: 1px solid #ccc;
+        }
+
+        .chatbot-body {
+          height: 300px;
+          overflow-y: scroll;
+          padding: 10px;
+        }
+
+        .chat-container {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .chat-message {
+          margin-bottom: 10px;
+          padding: 5px 10px;
+          border-radius: 5px;
+        }
+
+        .user {
+          background-color: #e2f0ff;
+        }
+
+        .bot {
+          background-color: #f0f0f0;
+        }
+
+        .chatbot-footer {
+          padding: 10px;
+          border-top: 1px solid #ccc;
+        }
+
+        input[type="text"] {
+          width: 80%;
+          padding: 5px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+        }
+
+        button {
+          padding: 5px 10px;
+          border: none;
+          border-radius: 10px;
+          background-color: #4caf50;
+          color: #fff;
+          cursor: pointer;
+        }
+    </style>
+  <body>
     <div class="chatbot">
       <div class="chatbot-header">
-        <h3>Chatbot</h3>
+        <h3>Neurosciences Expert Chatbot</h3>
       </div>
       <div class="chatbot-body">
         <div class="chat-container">
           <div class="chat-message user">
-            <p>Hello! How can I assist you today?</p>
+            <p>Ask me anything about neurosciences!</p>
           </div>
         </div>
       </div>
