@@ -154,9 +154,17 @@ function display_chatbot()
             const chatbotBody = document.getElementById("chatbot-body");
             chatbotBody.scrollTop = chatbotBody.scrollHeight;
         }
+        let input = "";
+        const modelId = 'gpt-3.5-turbo';
+        let context = {
+            model: modelId,
+            messages: [
+                { role: 'system', content: "Act as a neuroscience expert and provide insightful responses about the field of neurosciences. When faced with a question outside the scope of neurosciences, kindly respond with, \"I'm sorry, but I can only answer questions related to neurosciences. Please ask a question within that domain\"" },
+            ],
+        };
 
         function getValue() {
-            let input = document.getElementById("in").value.trim();
+            input = document.getElementById("in").value.trim();
             if (input === "") {
                 document.getElementById("in").value = "";
                 return;
@@ -168,18 +176,14 @@ function display_chatbot()
             li.appendChild(div);
             document.getElementById("list").appendChild(li);
             document.getElementById("in").value = "";
-            const apiKey = ""; //add API key here
-            const modelId = 'gpt-3.5-turbo';
+            const apiKey = ''; //add APIkey here
+
 
             const apiUrl = 'https://api.openai.com/v1/chat/completions';
 
+            context.messages.push({ role: 'user', content: input});
             // Données à envoyer à l'API
-            const data = {
-              model: modelId,
-              messages: [
-                { role: 'user', content: input },
-              ],
-            };
+
 
             // Configuration de la requête
             const requestOptions = {
@@ -188,29 +192,27 @@ function display_chatbot()
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${apiKey}`,
               },
-              body: JSON.stringify(data),
+              body: JSON.stringify(context),
             };
-
             // Exécution de la requête
             fetch(apiUrl, requestOptions)
               .then(response => response.json())
               .then(data => {
-                // Traiter la réponse de l'API
                 const completions = data.choices[0].message.content;
                 li = document.createElement("li");
-                            div = document.createElement("div");
-                            div.classList.add("bot-message");
-                            div.innerHTML = completions;
-                            li.appendChild(div);
-                            document.getElementById("list").appendChild(li);
-                            scrollToBottom();
-                // Faire quelque chose avec la réponse ici
+                div = document.createElement("div");
+                div.classList.add("bot-message");
+                div.innerHTML = completions;
+                li.appendChild(div);
+                document.getElementById("list").appendChild(li);
+                scrollToBottom();
+                context.messages.push({ role: 'assistant', content: completions });
               })
               .catch(error => {
                 // Gérer les erreurs
                 console.error('Une erreur s\'est produite:', error);
               });
-
+              scrollToBottom();
         }
     </script>
 </body>
