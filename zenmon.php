@@ -1,17 +1,37 @@
 <?php
 /**
- * Plugin Name: My Chatbot Plugin
- * Description: Blank chatbot plugin for AI training.
+ * Plugin Name: Neuroscience ChatBot Plugin
+ * Description: ChatBot expert in neurosciences.
  * Version: 1.0.0
- * Author: Your Name
+ * Authors: Pauline Mieuzet, Corentin Mieuzet, Baptist Levrel
  */
 
-function my_chatbot_display_interface()
+function display_chatbot()
 {
     ?>
 <!doctype html>
     <html>
     <style>
+        #user {
+            background-color: #e2f0ff;
+            max-width: 80%;
+            border-radius: 5px;
+            text-align: right;
+            text-align-last: left;
+            margin-left: auto;
+            width: fit-content;
+            word-break: break-word;
+            margin-bottom: 10px;
+        }
+
+        #bot {
+            background-color: #f0f0f0;
+            max-width: 80%;
+            border-radius: 5px;
+            width: fit-content;
+            word-break: break-word;
+            margin-bottom: 10px;
+        }
         #chatbot {
           border: 1px solid #ccc;
           border-radius: 5px;
@@ -27,27 +47,16 @@ function my_chatbot_display_interface()
 
         #chatbot-body {
           height: 300px;
-          overflow-y: scroll;
           padding: 10px;
+          overflow-y: scroll;
+          max-width: 600px;
+          word-wrap: break-all;
         }
 
         #chat-message {
           margin-bottom: 10px;
           padding: 5px 10px;
           border-radius: 5px;
-        }
-
-        #user {
-	  background-color: #e2f0ff;
-	  text-align: right;
-	  align-self: flex-end;
-	  border-radius: 3px;
-        }
-
-        #bot {
-	  background-color: #f0f0f0;
-	  align-self: flex-start;
-	  border-radius: 3px;
         }
 
         #chatbot-footer {
@@ -63,17 +72,19 @@ function my_chatbot_display_interface()
         }
 
         button {
-          padding: 5px 10px;
+          padding: 5px 2.5em;
           border: none;
           border-radius: 10px;
           background-color: #4caf50;
           color: #fff;
           cursor: pointer;
-	}
+        }
 
-	ul {
-	  list-style-type:none;
-	}
+        ul {
+          list-style-type: none;
+          padding: 0;
+          width: 100%;
+        }
 
     </style>
   <body>
@@ -83,25 +94,50 @@ function my_chatbot_display_interface()
       </div>
       <div id="chatbot-body">
           <ul id="list">
-            <li id="bot">Ask me anything about neurosciences!</li>
+            <li> <div id="bot">Ask me anything about neurosciences!</div></li>
           </ul>
       </div>
       <div id="chatbot-footer">
-        <input type="text" placeholder="Type your message here" id="in" />
+        <input type="text" placeholder="Type your message here" id="in" onkeyup="keyHandler(event)">
         <button onclick="getValue();">Send</button>
-	<script>
-	function getValue(){
-		let input = document.getElementById("in").value;
-		let li = document.createElement("li");
-		li.setAttribute("id", "user");
-		li.innerHTML = input;
-		document.getElementById("list").appendChild(li);
-		document.getElementById("in").value = "";
-		li = document.createElement("li");
-		li.setAttribute("id", "bot");
-		li.innerHTML = "Next";
-		document.getElementById("list").appendChild(li);
-	}</script>
+        <script>
+
+        function keyHandler(event)
+        {
+           if (event.key === 'Enter')
+                getValue();
+            event.preventDefault();
+        }
+
+        function scrollToBottom()
+        {
+            const chatbotBody = document.getElementById("chatbot-body");
+            chatbotBody.scrollTop = chatbotBody.scrollHeight;
+        }
+
+        function getValue()
+        {
+            let input = document.getElementById("in").value.trim();
+            if (input === "")
+            {
+                document.getElementById("in").value = "";
+                return ;
+            }
+            let li = document.createElement("li");
+            let div = document.createElement("div");
+            div.setAttribute("id", "user");
+            div.innerHTML = input;
+            li.appendChild(div);
+            document.getElementById("list").appendChild(li);
+            document.getElementById("in").value = "";
+            li = document.createElement("li");
+            div = document.createElement("div");
+            div.setAttribute("id", "bot");
+            div.innerHTML = "coucou coucou coucou coucou coucou coucou coucou coucou coucou coucou coucou coucou coucou coucou coucou coucou coucou coucou coucou coucou coucou coucou coucou coucou ";
+            li.appendChild(div);
+            document.getElementById("list").appendChild(li);
+            scrollToBottom();
+        }</script>
       </div>
     </div>
   </body>
@@ -109,4 +145,4 @@ function my_chatbot_display_interface()
     <?php
 }
 
-add_action('wp_head', 'my_chatbot_display_interface');
+add_action('wp_head', 'display_chatbot');
